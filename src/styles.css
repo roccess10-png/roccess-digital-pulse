@@ -4,6 +4,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-navy: #0F172A;
+  --color-electric: #3B82F6;
+  --color-amber: #F59E0B;
+  --color-soft: #F8FAFC;
+  --color-ink: #1E293B;
+}
+
 /*
  * Design system definition.
  *
