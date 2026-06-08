@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   ArrowRight,
   Globe,
@@ -79,22 +79,6 @@ const projects = [
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [palette, setPalette] = useState<"default" | "violet">("default");
-
-  useEffect(() => {
-    const saved = (localStorage.getItem("roccess-palette") as "default" | "violet") || "default";
-    setPalette(saved);
-    if (saved === "violet") document.documentElement.setAttribute("data-palette", "violet");
-    else document.documentElement.removeAttribute("data-palette");
-  }, []);
-
-  const togglePalette = () => {
-    const next = palette === "default" ? "violet" : "default";
-    setPalette(next);
-    localStorage.setItem("roccess-palette", next);
-    if (next === "violet") document.documentElement.setAttribute("data-palette", "violet");
-    else document.documentElement.removeAttribute("data-palette");
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
