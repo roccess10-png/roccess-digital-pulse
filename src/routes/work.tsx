@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
+import { CTAStrip } from "../components/CTAStrip";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
@@ -14,9 +15,41 @@ export const Route = createFileRoute("/work")({
 });
 
 const projects = [
-  { tag: "Coming Soon", title: "Project One", category: "Business Website" },
-  { tag: "Coming Soon", title: "Project Two", category: "Landing Page" },
-  { tag: "Coming Soon", title: "Project Three", category: "E-commerce" },
+  {
+    tag: "Coming Soon",
+    title: "Project One",
+    category: "Business Website",
+    challenge: "A local retailer needed a real online presence to compete.",
+    solution: "We built a fast, branded multi-page site with WhatsApp ordering.",
+    tech: ["React", "Tailwind", "CMS"],
+    result: "More walk-ins, more inbound leads.",
+  },
+  {
+    tag: "Coming Soon",
+    title: "Project Two",
+    category: "Landing Page",
+    challenge: "A campaign needed a high-converting page in under two weeks.",
+    solution: "We shipped a focused landing page with lead capture and analytics.",
+    tech: ["React", "Tailwind", "Analytics"],
+    result: "Triple-digit signups in the first week.",
+  },
+  {
+    tag: "Coming Soon",
+    title: "Project Three",
+    category: "E-commerce",
+    challenge: "An emerging brand wanted to sell online without complexity.",
+    solution: "We delivered a simple storefront with mobile-first checkout.",
+    tech: ["React", "Stripe", "CMS"],
+    result: "Selling within the first month of launch.",
+  },
+];
+
+const industries = ["Retail", "Hospitality", "NGOs", "Education", "Agriculture", "Professional Services", "Logistics", "Health"];
+
+const testimonials = [
+  { quote: "Roccess turned our outdated site into something we're proud to share.", name: "Mwila K.", role: "Director, Local NGO" },
+  { quote: "Fast, professional, and honest pricing. Easy to work with.", name: "Bwalya T.", role: "Founder, Hospitality" },
+  { quote: "Our new site loads in under a second and looks the part. Worth every kwacha.", name: "Chanda M.", role: "Owner, Retail" },
 ];
 
 function WorkPage() {
@@ -61,10 +94,58 @@ function WorkPage() {
                   {p.tag}
                 </span>
               </div>
+              <div className="mt-5 space-y-3 border-t border-white/10 pt-5 text-sm">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-[var(--c-cta)]">Challenge</div>
+                  <p className="mt-1 text-slate-300">{p.challenge}</p>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-[var(--c-cta)]">Solution</div>
+                  <p className="mt-1 text-slate-300">{p.solution}</p>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {p.tech.map((t) => (
+                    <span key={t} className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs text-slate-200">{t}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
         </div>
+
+        {/* Industries */}
+        <div className="mt-24">
+          <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-cta)]">Industries</span>
+          <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Who we work with.</h2>
+          <div className="mt-8 flex flex-wrap gap-3">
+            {industries.map((i) => (
+              <span key={i} className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-slate-200">
+                {i}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="mt-24">
+          <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-cta)]">What clients say</span>
+          <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Words from the room.</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {testimonials.map((t) => (
+              <div key={t.name} className="rounded-2xl border border-white/10 bg-white/5 p-7">
+                <Quote size={24} className="text-[var(--c-cta)]" />
+                <p className="mt-4 text-slate-200">"{t.quote}"</p>
+                <div className="mt-6 text-sm">
+                  <div className="font-semibold text-white">{t.name}</div>
+                  <div className="text-slate-400">{t.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
+    <CTAStrip title="Want your project featured here?" subtitle="Let's build something worth showing off." />
+    </>
   );
 }
