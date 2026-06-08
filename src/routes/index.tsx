@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Globe,
@@ -17,6 +17,7 @@ import {
   Menu,
   X,
   Check,
+  Palette,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -79,6 +80,22 @@ const projects = [
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [palette, setPalette] = useState<"default" | "violet">("default");
+
+  useEffect(() => {
+    const saved = (localStorage.getItem("roccess-palette") as "default" | "violet") || "default";
+    setPalette(saved);
+    if (saved === "violet") document.documentElement.setAttribute("data-palette", "violet");
+    else document.documentElement.removeAttribute("data-palette");
+  }, []);
+
+  const togglePalette = () => {
+    const next = palette === "default" ? "violet" : "default";
+    setPalette(next);
+    localStorage.setItem("roccess-palette", next);
+    if (next === "violet") document.documentElement.setAttribute("data-palette", "violet");
+    else document.documentElement.removeAttribute("data-palette");
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,32 +112,32 @@ function Index() {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans text-[#1E293B] antialiased">
+    <div className="min-h-screen bg-white font-sans text-[var(--c-text)] antialiased">
       {/* NAV */}
       <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           <a href="#" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0F172A]">
-              <span className="text-lg font-extrabold text-[#F59E0B]">R</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--c-primary)]">
+              <span className="text-lg font-extrabold text-[var(--c-cta)]">R</span>
             </div>
-            <span className="text-xl font-extrabold tracking-tight text-[#0F172A]">Roccess</span>
+            <span className="text-xl font-extrabold tracking-tight text-[var(--c-primary)]">Roccess</span>
           </a>
           <nav className="hidden items-center gap-8 md:flex">
             {nav.map((n) => (
-              <a key={n.href} href={n.href} className="text-sm font-medium text-slate-600 transition hover:text-[#0F172A]">
+              <a key={n.href} href={n.href} className="text-sm font-medium text-slate-600 transition hover:text-[var(--c-primary)]">
                 {n.label}
               </a>
             ))}
           </nav>
           <a
             href="#contact"
-            className="hidden rounded-full bg-[#F59E0B] px-5 py-2.5 text-sm font-semibold text-[#0F172A] shadow-sm transition hover:bg-amber-400 md:inline-flex"
+            className="hidden rounded-full bg-[var(--c-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--c-primary)] shadow-sm transition hover:opacity-90 md:inline-flex"
           >
             Get a Quote
           </a>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-md p-2 text-[#0F172A] md:hidden"
+            className="rounded-md p-2 text-[var(--c-primary)] md:hidden"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -137,7 +154,7 @@ function Index() {
               <a
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="rounded-full bg-[#F59E0B] px-5 py-2.5 text-center text-sm font-semibold text-[#0F172A]"
+                className="rounded-full bg-[var(--c-cta)] px-5 py-2.5 text-center text-sm font-semibold text-[var(--c-primary)]"
               >
                 Get a Quote
               </a>
@@ -147,23 +164,23 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[#0F172A] text-white">
+      <section className="relative overflow-hidden bg-[var(--c-primary)] text-white">
         <div
           className="absolute inset-0 opacity-30"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 20% 20%, #3B82F6 0%, transparent 50%), radial-gradient(circle at 80% 60%, #F59E0B 0%, transparent 45%)",
+              "radial-gradient(circle at 20% 20%, var(--c-accent) 0%, transparent 50%), radial-gradient(circle at 80% 60%, var(--c-cta) 0%, transparent 45%)",
           }}
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
           <div className="max-w-3xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-slate-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--c-cta)]" />
               Web Design Studio · Mansa, Zambia
             </div>
             <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              We Build Websites <span className="text-[#F59E0B]">That Work.</span>
+              We Build Websites <span className="text-[var(--c-cta)]">That Work.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-slate-300 sm:text-xl">
               Fast, modern, professional websites for ambitious Zambian businesses. We design to grow your brand — not just to look good.
@@ -171,7 +188,7 @@ function Index() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-[#F59E0B] px-7 py-3.5 text-base font-semibold text-[#0F172A] shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--c-cta)] px-7 py-3.5 text-base font-semibold text-[var(--c-primary)] shadow-lg shadow-black/20 transition hover:opacity-90"
               >
                 Get a Free Quote <ArrowRight size={18} />
               </a>
@@ -203,8 +220,8 @@ function Index() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
             <div>
-              <span className="text-sm font-semibold uppercase tracking-widest text-[#3B82F6]">About Roccess</span>
-              <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0F172A] sm:text-5xl">
+              <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">About Roccess</span>
+              <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[var(--c-primary)] sm:text-5xl">
                 A driven studio with one focus: results.
               </h2>
             </div>
@@ -214,13 +231,13 @@ function Index() {
                 establish a powerful online presence with websites that look sharp, load fast, and convert visitors into customers.
               </p>
               <p>
-                Founded by <span className="font-semibold text-[#0F172A]">Roy Lupemba</span> and{" "}
-                <span className="font-semibold text-[#0F172A]">Musasa Banda</span>, we combine global design standards with a
+                Founded by <span className="font-semibold text-[var(--c-primary)]">Roy Lupemba</span> and{" "}
+                <span className="font-semibold text-[var(--c-primary)]">Musasa Banda</span>, we combine global design standards with a
                 deep understanding of the Zambian market — giving you a real partner, not just a vendor.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 {["Results-Driven", "Locally Grounded", "Modern Standards"].map((t) => (
-                  <span key={t} className="rounded-full bg-[#F8FAFC] px-4 py-2 text-sm font-medium text-[#0F172A]">
+                  <span key={t} className="rounded-full bg-[var(--c-soft)] px-4 py-2 text-sm font-medium text-[var(--c-primary)]">
                     {t}
                   </span>
                 ))}
@@ -231,11 +248,11 @@ function Index() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="bg-[#F8FAFC] py-24 lg:py-32">
+      <section id="services" className="bg-[var(--c-soft)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-widest text-[#3B82F6]">Services</span>
-            <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0F172A] sm:text-5xl">
+            <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">Services</span>
+            <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[var(--c-primary)] sm:text-5xl">
               What we build for you.
             </h2>
             <p className="mt-5 text-lg text-slate-600">
@@ -246,12 +263,12 @@ function Index() {
             {services.map((s) => (
               <div
                 key={s.title}
-                className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 transition hover:-translate-y-1 hover:border-[#3B82F6] hover:shadow-xl hover:shadow-blue-500/5"
+                className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 transition hover:-translate-y-1 hover:border-[var(--c-accent)] hover:shadow-xl hover:shadow-blue-500/5"
               >
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#0F172A] text-[#F59E0B] transition group-hover:bg-[#3B82F6] group-hover:text-white">
+                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--c-primary)] text-[var(--c-cta)] transition group-hover:bg-[var(--c-accent)] group-hover:text-white">
                   <s.icon size={22} />
                 </div>
-                <h3 className="text-lg font-bold text-[#0F172A]">{s.title}</h3>
+                <h3 className="text-lg font-bold text-[var(--c-primary)]">{s.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{s.desc}</p>
               </div>
             ))}
@@ -264,8 +281,8 @@ function Index() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <span className="text-sm font-semibold uppercase tracking-widest text-[#3B82F6]">Why Choose Us</span>
-              <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0F172A] sm:text-5xl">
+              <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">Why Choose Us</span>
+              <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[var(--c-primary)] sm:text-5xl">
                 Built for businesses that mean it.
               </h2>
               <p className="mt-5 text-lg text-slate-600">
@@ -274,11 +291,11 @@ function Index() {
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7">
               {reasons.map((r) => (
-                <div key={r.title} className="rounded-2xl border border-slate-100 bg-[#F8FAFC] p-6">
-                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#3B82F6]/10 text-[#3B82F6]">
+                <div key={r.title} className="rounded-2xl border border-slate-100 bg-[var(--c-soft)] p-6">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--c-accent)]/10 text-[var(--c-accent)]">
                     <r.icon size={20} />
                   </div>
-                  <h3 className="font-bold text-[#0F172A]">{r.title}</h3>
+                  <h3 className="font-bold text-[var(--c-primary)]">{r.title}</h3>
                   <p className="mt-2 text-sm text-slate-600">{r.desc}</p>
                 </div>
               ))}
@@ -288,11 +305,11 @@ function Index() {
       </section>
 
       {/* WORK */}
-      <section id="work" className="bg-[#0F172A] py-24 text-white lg:py-32">
+      <section id="work" className="bg-[var(--c-primary)] py-24 text-white lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <span className="text-sm font-semibold uppercase tracking-widest text-[#F59E0B]">Our Work</span>
+              <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-cta)]">Our Work</span>
               <h2 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Selected projects.</h2>
               <p className="mt-5 text-lg text-slate-300">
                 A glimpse of what we're working on. Real client work coming soon.
@@ -303,17 +320,17 @@ function Index() {
             {projects.map((p, i) => (
               <div
                 key={p.title}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-[#F59E0B]/50"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-[var(--c-cta)]/50"
               >
                 <div
                   className="aspect-[4/3] w-full rounded-xl"
                   style={{
                     background:
                       i === 0
-                        ? "linear-gradient(135deg,#3B82F6,#0F172A)"
+                        ? "linear-gradient(135deg,var(--c-accent),var(--c-primary))"
                         : i === 1
-                          ? "linear-gradient(135deg,#F59E0B,#0F172A)"
-                          : "linear-gradient(135deg,#1E293B,#3B82F6)",
+                          ? "linear-gradient(135deg,var(--c-cta),var(--c-primary))"
+                          : "linear-gradient(135deg,var(--c-text),var(--c-accent))",
                   }}
                 />
                 <div className="mt-6 flex items-center justify-between">
@@ -321,7 +338,7 @@ function Index() {
                     <div className="text-xs uppercase tracking-wider text-slate-400">{p.category}</div>
                     <div className="mt-1 text-lg font-bold">{p.title}</div>
                   </div>
-                  <span className="rounded-full bg-[#F59E0B]/15 px-3 py-1 text-xs font-semibold text-[#F59E0B]">
+                  <span className="rounded-full bg-[var(--c-cta)]/15 px-3 py-1 text-xs font-semibold text-[var(--c-cta)]">
                     {p.tag}
                   </span>
                 </div>
@@ -332,12 +349,12 @@ function Index() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="bg-[#F8FAFC] py-24 lg:py-32">
+      <section id="contact" className="bg-[var(--c-soft)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-2">
             <div>
-              <span className="text-sm font-semibold uppercase tracking-widest text-[#3B82F6]">Get In Touch</span>
-              <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#0F172A] sm:text-5xl">
+              <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">Get In Touch</span>
+              <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[var(--c-primary)] sm:text-5xl">
                 Let's build something that works.
               </h2>
               <p className="mt-5 text-lg text-slate-600">
@@ -345,20 +362,20 @@ function Index() {
               </p>
               <div className="mt-10 space-y-5">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[#3B82F6] shadow-sm">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[var(--c-accent)] shadow-sm">
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-[#0F172A]">Location</div>
+                    <div className="text-sm font-semibold text-[var(--c-primary)]">Location</div>
                     <div className="text-sm text-slate-600">Mansa, Luapula Province, Zambia</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[#3B82F6] shadow-sm">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white text-[var(--c-accent)] shadow-sm">
                     <Mail size={18} />
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-[#0F172A]">Email</div>
+                    <div className="text-sm font-semibold text-[var(--c-primary)]">Email</div>
                     <div className="text-sm text-slate-600">hello@roccess.co.zm</div>
                   </div>
                 </div>
@@ -382,7 +399,7 @@ function Index() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-600">
                     <Check size={28} />
                   </div>
-                  <h3 className="mt-6 text-2xl font-bold text-[#0F172A]">Message sent!</h3>
+                  <h3 className="mt-6 text-2xl font-bold text-[var(--c-primary)]">Message sent!</h3>
                   <p className="mt-2 text-slate-600">We'll be in touch within one business day.</p>
                 </div>
               ) : (
@@ -391,7 +408,7 @@ function Index() {
                   <Field icon={Mail} label="Email" id="email" type="email" placeholder="you@example.com" />
                   <Field icon={Phone} label="Phone" id="phone" type="tel" placeholder="+260 ..." />
                   <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-semibold text-[#0F172A]">
+                    <label htmlFor="message" className="mb-2 block text-sm font-semibold text-[var(--c-primary)]">
                       Message
                     </label>
                     <div className="relative">
@@ -401,13 +418,13 @@ function Index() {
                         required
                         rows={5}
                         placeholder="Tell us about your project..."
-                        className="w-full resize-none rounded-xl border border-slate-200 bg-[#F8FAFC] py-3 pl-12 pr-4 text-sm text-[#0F172A] placeholder:text-slate-400 focus:border-[#3B82F6] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20"
+                        className="w-full resize-none rounded-xl border border-slate-200 bg-[var(--c-soft)] py-3 pl-12 pr-4 text-sm text-[var(--c-primary)] placeholder:text-slate-400 focus:border-[var(--c-accent)] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[var(--c-accent)]/20"
                       />
                     </div>
                   </div>
                   <button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#F59E0B] px-6 py-3.5 text-base font-semibold text-[#0F172A] shadow-lg shadow-amber-500/20 transition hover:bg-amber-400"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--c-cta)] px-6 py-3.5 text-base font-semibold text-[var(--c-primary)] shadow-lg shadow-black/20 transition hover:opacity-90"
                   >
                     Send Message <ArrowRight size={18} />
                   </button>
@@ -419,13 +436,13 @@ function Index() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#0F172A] py-14 text-slate-400">
+      <footer className="bg-[var(--c-primary)] py-14 text-slate-400">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#F59E0B]">
-                  <span className="text-lg font-extrabold text-[#0F172A]">R</span>
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--c-cta)]">
+                  <span className="text-lg font-extrabold text-[var(--c-primary)]">R</span>
                 </div>
                 <span className="text-xl font-extrabold text-white">Roccess</span>
               </div>
@@ -438,7 +455,7 @@ function Index() {
             <div className="text-sm">
               <div className="font-semibold text-white">Contact</div>
               <p className="mt-3">hello@roccess.co.zm</p>
-              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="mt-1 inline-block text-[#F59E0B] hover:underline">
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="mt-1 inline-block text-[var(--c-cta)] hover:underline">
                 WhatsApp us
               </a>
             </div>
@@ -449,6 +466,16 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      {/* Palette toggle */}
+      <button
+        onClick={togglePalette}
+        aria-label="Toggle color palette"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[var(--c-primary)] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:opacity-90"
+      >
+        <Palette size={16} />
+        {palette === "default" ? "Try Violet" : "Classic Navy"}
+      </button>
     </div>
   );
 }
@@ -468,7 +495,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-[#0F172A]">
+      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-[var(--c-primary)]">
         {label}
       </label>
       <div className="relative">
@@ -478,7 +505,7 @@ function Field({
           type={type}
           required
           placeholder={placeholder}
-          className="w-full rounded-xl border border-slate-200 bg-[#F8FAFC] py-3 pl-12 pr-4 text-sm text-[#0F172A] placeholder:text-slate-400 focus:border-[#3B82F6] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/20"
+          className="w-full rounded-xl border border-slate-200 bg-[var(--c-soft)] py-3 pl-12 pr-4 text-sm text-[var(--c-primary)] placeholder:text-slate-400 focus:border-[var(--c-accent)] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[var(--c-accent)]/20"
         />
       </div>
     </div>
