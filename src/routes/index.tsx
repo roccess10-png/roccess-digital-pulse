@@ -449,16 +449,6 @@ function Index() {
           </div>
         </div>
       </footer>
-
-      {/* Palette toggle */}
-      <button
-        onClick={togglePalette}
-        aria-label="Toggle color palette"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[var(--c-primary)] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:opacity-90"
-      >
-        <Palette size={16} />
-        {palette === "default" ? "Try Violet" : "Classic Navy"}
-      </button>
     </div>
   );
 }
