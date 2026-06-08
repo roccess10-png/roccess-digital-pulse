@@ -79,7 +79,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
       <footer className="bg-[var(--c-primary)] py-14 text-slate-400">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-10 md:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-4">
             <div>
               <div className="flex items-center gap-2">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--c-cta)]">
@@ -88,6 +88,16 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 <span className="text-xl font-extrabold text-white">Roccess</span>
               </div>
               <p className="mt-4 text-sm">Websites that work — built in Mansa, for businesses going somewhere.</p>
+            </div>
+            <div className="text-sm">
+              <div className="font-semibold text-white">Explore</div>
+              <ul className="mt-3 space-y-2">
+                {nav.map((n) => (
+                  <li key={n.to}>
+                    <Link to={n.to} className="hover:text-[var(--c-cta)]">{n.label}</Link>
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="text-sm">
               <div className="font-semibold text-white">Location</div>
