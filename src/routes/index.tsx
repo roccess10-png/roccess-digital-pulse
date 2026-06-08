@@ -17,7 +17,6 @@ import {
   Menu,
   X,
   Check,
-  Palette,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
