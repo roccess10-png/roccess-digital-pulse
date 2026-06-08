@@ -1,48 +1,30 @@
-import { createFileRoute } from "@tanstack/react-router";
-import App from "../App";
+import { useState } from "react";
+import {
+  ArrowRight,
+  Globe,
+  Briefcase,
+  Rocket,
+  Wrench,
+  Heart,
+  DollarSign,
+  Zap,
+  MapPin,
+  Mail,
+  Phone,
+  User,
+  MessageSquare,
+  Menu,
+  X,
+  Check,
+} from "lucide-react";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Roccess — Web Design That Works | Mansa, Zambia" },
-      {
-        name: "description",
-        content:
-          "Roccess is a results-driven web design company in Mansa, Zambia. We build fast, modern websites that help local and regional businesses grow online.",
-      },
-      { property: "og:title", content: "Roccess — Web Design That Works" },
-      {
-        property: "og:description",
-        content: "Modern websites for ambitious businesses in Zambia and beyond.",
-      },
-    ],
-  }),
-  component: App,
-});
-
-const WHATSAPP_NUMBER = "260000000000"; // Placeholder
+const WHATSAPP_NUMBER = "260000000000";
 
 const services = [
-  {
-    icon: Globe,
-    title: "Website Design",
-    desc: "Custom-designed websites built around your brand, your goals, and your audience.",
-  },
-  {
-    icon: Briefcase,
-    title: "Business Websites",
-    desc: "Professional multi-page sites that turn visitors into customers and build credibility.",
-  },
-  {
-    icon: Rocket,
-    title: "Landing Pages",
-    desc: "High-converting single-page sites designed for campaigns, launches, and lead capture.",
-  },
-  {
-    icon: Wrench,
-    title: "Website Maintenance",
-    desc: "Keep your site fast, secure, and up to date with ongoing care and content updates.",
-  },
+  { icon: Globe, title: "Website Design", desc: "Custom-designed websites built around your brand, your goals, and your audience." },
+  { icon: Briefcase, title: "Business Websites", desc: "Professional multi-page sites that turn visitors into customers and build credibility." },
+  { icon: Rocket, title: "Landing Pages", desc: "High-converting single-page sites designed for campaigns, launches, and lead capture." },
+  { icon: Wrench, title: "Website Maintenance", desc: "Keep your site fast, secure, and up to date with ongoing care and content updates." },
 ];
 
 const reasons = [
@@ -58,7 +40,7 @@ const projects = [
   { tag: "Coming Soon", title: "Project Three", category: "E-commerce" },
 ];
 
-function Index() {
+export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -78,7 +60,6 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[var(--c-text)] antialiased">
-      {/* NAV */}
       <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           <a href="#" className="flex items-center gap-2">
@@ -128,7 +109,6 @@ function Index() {
         )}
       </header>
 
-      {/* HERO */}
       <section className="relative overflow-hidden bg-[var(--c-primary)] text-white">
         <div
           className="absolute inset-0 opacity-30"
@@ -180,7 +160,6 @@ function Index() {
         </div>
       </section>
 
-      {/* ABOUT */}
       <section id="about" className="bg-white py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
@@ -212,7 +191,6 @@ function Index() {
         </div>
       </section>
 
-      {/* SERVICES */}
       <section id="services" className="bg-[var(--c-soft)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
@@ -241,7 +219,6 @@ function Index() {
         </div>
       </section>
 
-      {/* WHY US */}
       <section id="why" className="bg-white py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-12">
@@ -269,7 +246,6 @@ function Index() {
         </div>
       </section>
 
-      {/* WORK */}
       <section id="work" className="bg-[var(--c-primary)] py-24 text-white lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -313,7 +289,6 @@ function Index() {
         </div>
       </section>
 
-      {/* CONTACT */}
       <section id="contact" className="bg-[var(--c-soft)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-2">
@@ -400,7 +375,6 @@ function Index() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="bg-[var(--c-primary)] py-14 text-slate-400">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-10 md:grid-cols-3">
