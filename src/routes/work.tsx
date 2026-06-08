@@ -54,6 +54,7 @@ const testimonials = [
 
 function WorkPage() {
   return (
+    <>
     <section className="bg-[var(--c-primary)] py-24 text-white lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
