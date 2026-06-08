@@ -1,5 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Globe, Briefcase, Rocket, Wrench } from "lucide-react";
+import {
+  ArrowRight,
+  Globe,
+  Briefcase,
+  Rocket,
+  Wrench,
+  Search,
+  PenTool,
+  Code2,
+  Send,
+  Quote,
+} from "lucide-react";
+import { CTAStrip } from "../components/CTAStrip";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +34,20 @@ const highlights = [
   { icon: Briefcase, title: "Business Websites" },
   { icon: Rocket, title: "Landing Pages" },
   { icon: Wrench, title: "Maintenance" },
+];
+
+const process = [
+  { icon: Search, title: "Discover", desc: "We learn your business, audience, and goals." },
+  { icon: PenTool, title: "Design", desc: "We craft a design that fits your brand." },
+  { icon: Code2, title: "Build", desc: "We engineer it to be fast, responsive, and reliable." },
+  { icon: Send, title: "Launch", desc: "We ship it live and support you after launch." },
+];
+
+const stats = [
+  ["20+", "Projects Shipped"],
+  ["<2s", "Avg. Load Time"],
+  ["98%", "Client Satisfaction"],
+  ["<24h", "Reply Time"],
 ];
 
 function Home() {
@@ -78,6 +104,22 @@ function Home() {
         </div>
       </section>
 
+      {/* Trust strip */}
+      <section className="border-y border-slate-100 bg-white py-10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
+            Trusted by businesses across Luapula & beyond
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-6 opacity-70 sm:grid-cols-3 md:grid-cols-6">
+            {["Kanono Co.", "Luapula Foods", "Mansa Auto", "BrightPath", "Sasa Logistics", "NorthStar NGO"].map((b) => (
+              <div key={b} className="text-center text-sm font-bold tracking-tight text-slate-500">
+                {b}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[var(--c-soft)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -103,6 +145,64 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Process */}
+      <section className="bg-white py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="max-w-2xl">
+            <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">How we work</span>
+            <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[var(--c-primary)] sm:text-5xl">
+              A clear process. No surprises.
+            </h2>
+            <p className="mt-5 text-lg text-slate-600">
+              Four steps from first conversation to launch — and we keep you in the loop the whole way.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {process.map((p, i) => (
+              <div key={p.title} className="relative rounded-2xl border border-slate-200 bg-[var(--c-soft)] p-7">
+                <div className="absolute -top-3 left-7 rounded-full bg-[var(--c-primary)] px-3 py-1 text-xs font-bold text-[var(--c-cta)]">
+                  Step {i + 1}
+                </div>
+                <div className="mt-3 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[var(--c-accent)]">
+                  <p.icon size={22} />
+                </div>
+                <h3 className="text-lg font-bold text-[var(--c-primary)]">{p.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className="bg-[var(--c-primary)] py-24 text-white lg:py-32">
+        <div className="mx-auto max-w-4xl px-6 text-center lg:px-10">
+          <Quote className="mx-auto text-[var(--c-cta)]" size={42} />
+          <p className="mt-8 text-2xl font-medium leading-relaxed text-slate-100 sm:text-3xl">
+            "Roccess delivered a website that actually brings in business. Clean design, fast delivery, and they really listened."
+          </p>
+          <div className="mt-8 text-sm text-slate-400">
+            <span className="font-semibold text-white">Chola M.</span> — Owner, Local Retail Brand
+          </div>
+        </div>
+      </section>
+
+      {/* Stats band */}
+      <section className="bg-[var(--c-soft)] py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {stats.map(([n, l]) => (
+              <div key={l} className="text-center">
+                <div className="text-4xl font-extrabold text-[var(--c-primary)] sm:text-5xl">{n}</div>
+                <div className="mt-2 text-xs uppercase tracking-wider text-slate-500">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTAStrip />
     </>
   );
 }

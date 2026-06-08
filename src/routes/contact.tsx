@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, MapPin, Mail, Phone, User, MessageSquare, Check } from "lucide-react";
+import { ArrowRight, MapPin, Mail, Phone, User, MessageSquare, Check, Clock, Zap, Plus, Minus } from "lucide-react";
 import { WHATSAPP_NUMBER } from "../components/SiteLayout";
 
 export const Route = createFileRoute("/contact")({
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +43,8 @@ function ContactPage() {
             <div className="mt-10 space-y-5">
               <InfoRow icon={MapPin} label="Location" value="Mansa, Luapula Province, Zambia" />
               <InfoRow icon={Mail} label="Email" value="hello@roccess.co.zm" />
+              <InfoRow icon={Clock} label="Office Hours" value="Mon–Fri, 08:00 – 17:00 CAT" />
+              <InfoRow icon={Zap} label="Response Time" value="Within 1 business day" />
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
@@ -68,6 +71,21 @@ function ContactPage() {
                 <Field icon={Mail} label="Email" id="email" type="email" placeholder="you@example.com" />
                 <Field icon={Phone} label="Phone" id="phone" type="tel" placeholder="+260 ..." />
                 <div>
+                  <label htmlFor="interest" className="mb-2 block text-sm font-semibold text-[var(--c-primary)]">
+                    What are you interested in?
+                  </label>
+                  <select
+                    id="interest"
+                    className="w-full rounded-xl border border-slate-200 bg-[var(--c-soft)] py-3 px-4 text-sm text-[var(--c-primary)] focus:border-[var(--c-accent)] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[var(--c-accent)]/20"
+                  >
+                    <option>Website Design</option>
+                    <option>Business Website</option>
+                    <option>Landing Page</option>
+                    <option>Website Maintenance</option>
+                    <option>Something else</option>
+                  </select>
+                </div>
+                <div>
                   <label htmlFor="message" className="mb-2 block text-sm font-semibold text-[var(--c-primary)]">
                     Message
                   </label>
@@ -92,10 +110,52 @@ function ContactPage() {
             )}
           </form>
         </div>
+
+        {/* FAQ */}
+        <div className="mt-24 grid gap-12 lg:grid-cols-3">
+          <div>
+            <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">FAQ</span>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[var(--c-primary)] sm:text-4xl">
+              Common questions.
+            </h2>
+            <p className="mt-4 text-slate-600">
+              Still have questions? Send us a message — we'll get back fast.
+            </p>
+          </div>
+          <div className="lg:col-span-2">
+            <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+              {faqs.map((f, i) => {
+                const open = openFaq === i;
+                return (
+                  <button
+                    key={f.q}
+                    type="button"
+                    onClick={() => setOpenFaq(open ? null : i)}
+                    className="w-full px-6 py-5 text-left"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-semibold text-[var(--c-primary)]">{f.q}</span>
+                      {open ? <Minus size={18} className="text-[var(--c-accent)]" /> : <Plus size={18} className="text-[var(--c-accent)]" />}
+                    </div>
+                    {open && <p className="mt-3 text-slate-600">{f.a}</p>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
+const faqs = [
+  { q: "How much does a website cost?", a: "Most projects start from ZMW 4,500. The final quote depends on pages, features, and timeline — we send a clear, no-obligation quote after a quick chat." },
+  { q: "How long does a project take?", a: "Landing pages: 1–2 weeks. Business sites: 3–5 weeks. We share a clear timeline before we start." },
+  { q: "Do you handle hosting and domains?", a: "Yes. We can set up hosting, domains, and business email — or work with what you already have." },
+  { q: "How many revisions do I get?", a: "Each package includes set revision rounds. We work closely with you so we rarely hit the limit." },
+  { q: "How do payments work?", a: "We typically split into 50% to start, 50% on launch. Payments via mobile money or bank transfer." },
+];
 
 function InfoRow({
   icon: Icon,
