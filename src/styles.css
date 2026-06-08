@@ -14,14 +14,6 @@
 }
 
 :root {
-  --c-primary: #0F172A;
-  --c-accent: #3B82F6;
-  --c-cta: #F59E0B;
-  --c-soft: #F8FAFC;
-  --c-text: #1E293B;
-}
-
-:root[data-palette="violet"] {
   --c-primary: #1A1A2E;
   --c-accent: #7C3AED;
   --c-cta: #A78BFA;

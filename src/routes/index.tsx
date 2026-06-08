@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   ArrowRight,
   Globe,
@@ -17,7 +17,6 @@ import {
   Menu,
   X,
   Check,
-  Palette,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -80,22 +79,6 @@ const projects = [
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [palette, setPalette] = useState<"default" | "violet">("default");
-
-  useEffect(() => {
-    const saved = (localStorage.getItem("roccess-palette") as "default" | "violet") || "default";
-    setPalette(saved);
-    if (saved === "violet") document.documentElement.setAttribute("data-palette", "violet");
-    else document.documentElement.removeAttribute("data-palette");
-  }, []);
-
-  const togglePalette = () => {
-    const next = palette === "default" ? "violet" : "default";
-    setPalette(next);
-    localStorage.setItem("roccess-palette", next);
-    if (next === "violet") document.documentElement.setAttribute("data-palette", "violet");
-    else document.documentElement.removeAttribute("data-palette");
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -466,16 +449,6 @@ function Index() {
           </div>
         </div>
       </footer>
-
-      {/* Palette toggle */}
-      <button
-        onClick={togglePalette}
-        aria-label="Toggle color palette"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[var(--c-primary)] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:opacity-90"
-      >
-        <Palette size={16} />
-        {palette === "default" ? "Try Violet" : "Classic Navy"}
-      </button>
     </div>
   );
 }
