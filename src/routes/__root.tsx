@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteLayout } from "../components/SiteLayout";
+// import {useDarkMode} from "../hooks/useDarkmode";
 
 function NotFoundComponent() {
   return (
@@ -78,14 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Roccess — Web Design That Works | Mansa, Zambia" },
+      { name: "description", content: "Roccess is a results-driven web design company in Mansa, Zambia. Fast, modern websites that help local and regional businesses grow online." },
+      { name: "author", content: "Roccess" },
+      { property: "og:title", content: "Roccess — Web Design That Works" },
+      { property: "og:description", content: "Modern websites for ambitious businesses in Zambia and beyond." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "robots", content: "index, follow"},
+      { property: "og:url", content: "https://roccess.netlify.app"},
+      { property: "og:image", content: "https://roccess.netlify.app/preview.jpg"},
+
+      // { name: "twitter:card", content: "summary" },
+      // { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

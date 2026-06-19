@@ -105,7 +105,8 @@ function Home() {
       </section>
 
       {/* Trust strip */}
-      <section className="border-y border-slate-100 bg-white py-10">
+
+      {/*<section className="border-y border-slate-100 bg-white py-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
             Trusted by businesses across Luapula & beyond
@@ -118,7 +119,7 @@ function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
 
       <section className="bg-[var(--c-soft)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -189,7 +190,7 @@ function Home() {
       </section>
 
       {/* Stats band */}
-      <section className="bg-[var(--c-soft)] py-20">
+      {/*<section className="bg-[var(--c-soft)] py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map(([n, l]) => (
@@ -200,7 +201,7 @@ function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
 
       <CTAStrip />
     </>

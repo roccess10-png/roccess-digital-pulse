@@ -120,7 +120,7 @@ function AboutPage() {
       </section>
 
       {/* Founders */}
-      <section className="bg-white py-24 lg:py-32">
+      {/*<section className="bg-white py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="max-w-2xl">
             <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">The Founders</span>
@@ -141,7 +141,7 @@ function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* Values */}
       <section className="bg-[var(--c-soft)] py-24 lg:py-32">
@@ -167,7 +167,7 @@ function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="bg-white py-24 lg:py-32">
+      {/*<section className="bg-white py-24 lg:py-32">
         <div className="mx-auto max-w-4xl px-6 lg:px-10">
           <div className="max-w-2xl">
             <span className="text-sm font-semibold uppercase tracking-widest text-[var(--c-accent)]">Milestones</span>
@@ -186,7 +186,7 @@ function AboutPage() {
             ))}
           </ol>
         </div>
-      </section>
+      </section>*/}
 
       <CTAStrip title="Want to work with us?" subtitle="Tell us about your project — we'll reply within a day." />
     </>

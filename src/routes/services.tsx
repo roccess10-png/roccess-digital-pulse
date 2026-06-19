@@ -71,16 +71,16 @@ const process = [
 const tiers = [
   {
     name: "Starter",
-    price: "From ZMW 4,500",
+    price: "From ZMW 1,200",
     desc: "A simple, professional presence to get you online.",
-    features: ["1–3 pages", "Mobile responsive", "Contact form", "1 round of revisions"],
+    features: ["1–3 pages", "Mobile responsive", "Contact form", "3 round of revisions"],
     highlighted: false,
   },
   {
     name: "Business",
-    price: "From ZMW 9,500",
+    price: "From ZMW 4,500",
     desc: "A full business site to grow your brand and bring in leads.",
-    features: ["Up to 8 pages", "CMS included", "Basic SEO", "WhatsApp integration", "2 rounds of revisions"],
+    features: ["Up to 8 pages", "CMS included", "Basic SEO", "WhatsApp integration", "6 rounds of revisions"],
     highlighted: true,
   },
   {

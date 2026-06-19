@@ -9,6 +9,8 @@ export const Route = createFileRoute("/work")({
       { name: "description", content: "Selected projects by Roccess. Real client work coming soon." },
       { property: "og:title", content: "Roccess Work" },
       { property: "og:description", content: "A glimpse of what we're building." },
+      { property: "og:image", content: "https://roccess.netlify.app/preview.jpg"},
+
     ],
   }),
   component: WorkPage,
@@ -33,15 +35,15 @@ const projects = [
     tech: ["React", "Tailwind", "Analytics"],
     result: "Triple-digit signups in the first week.",
   },
-  {
-    tag: "Coming Soon",
-    title: "Project Three",
-    category: "E-commerce",
-    challenge: "An emerging brand wanted to sell online without complexity.",
-    solution: "We delivered a simple storefront with mobile-first checkout.",
-    tech: ["React", "Stripe", "CMS"],
-    result: "Selling within the first month of launch.",
-  },
+  // {
+  //   tag: "Coming Soon",
+  //   title: "Project Three",
+  //   category: "E-commerce",
+  //   challenge: "An emerging brand wanted to sell online without complexity.",
+  //   solution: "We delivered a simple storefront with mobile-first checkout.",
+  //   tech: ["React", "Stripe", "CMS"],
+  //   result: "Selling within the first month of launch.",
+  // },
 ];
 
 const industries = ["Retail", "Hospitality", "NGOs", "Education", "Agriculture", "Professional Services", "Logistics", "Health"];

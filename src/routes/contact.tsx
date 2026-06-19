@@ -42,8 +42,8 @@ function ContactPage() {
             </p>
             <div className="mt-10 space-y-5">
               <InfoRow icon={MapPin} label="Location" value="Mansa, Luapula Province, Zambia" />
-              <InfoRow icon={Mail} label="Email" value="hello@roccess.co.zm" />
-              <InfoRow icon={Clock} label="Office Hours" value="Mon–Fri, 08:00 – 17:00 CAT" />
+              <InfoRow icon={Mail} label="Email" value="roccess10@gmail.com" />
+              <InfoRow icon={Clock} label="Response Hours" value="Mon–Sat, 08:00 – 18:00 CAT" />
               <InfoRow icon={Zap} label="Response Time" value="Within 1 business day" />
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -150,9 +150,9 @@ function ContactPage() {
 }
 
 const faqs = [
-  { q: "How much does a website cost?", a: "Most projects start from ZMW 4,500. The final quote depends on pages, features, and timeline — we send a clear, no-obligation quote after a quick chat." },
+  { q: "How much does a website cost?", a: "Most projects start from ZMW 1,200. The final quote depends on pages, features, and timeline — we send a clear, no-obligation quote after a quick chat." },
   { q: "How long does a project take?", a: "Landing pages: 1–2 weeks. Business sites: 3–5 weeks. We share a clear timeline before we start." },
-  { q: "Do you handle hosting and domains?", a: "Yes. We can set up hosting, domains, and business email — or work with what you already have." },
+  { q: "Do you handle hosting and domains?", a: "Yes. We can set up hosting and domains — or work with what you already have." },
   { q: "How many revisions do I get?", a: "Each package includes set revision rounds. We work closely with you so we rarely hit the limit." },
   { q: "How do payments work?", a: "We typically split into 50% to start, 50% on launch. Payments via mobile money or bank transfer." },
 ];
