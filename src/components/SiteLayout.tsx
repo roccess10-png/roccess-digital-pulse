@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 export const WHATSAPP_NUMBER = "260955816380";
 
@@ -13,52 +14,63 @@ const nav = [
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useDarkMode();
 
   return (
-    <div className="min-h-screen bg-white font-sans text-[var(--c-text)] antialiased">
-      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
+    <div className="min-h-screen bg-white font-sans text-[var(--c-text)] antialiased transition-colors dark:bg-[#0B0B1A] dark:text-slate-200">
+      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-[#0B0B1A]/80">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--c-primary)]">
               <span className="text-lg font-extrabold text-[var(--c-cta)]">R</span>
             </div>
-            <span className="text-xl font-extrabold tracking-tight text-[var(--c-primary)]">Roccess</span>
+            <span className="text-xl font-extrabold tracking-tight text-[var(--c-primary)] dark:text-white">Roccess</span>
           </Link>
           <nav className="hidden items-center gap-8 md:flex">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
-                className="text-sm font-medium text-slate-600 transition hover:text-[var(--c-primary)]"
-                activeProps={{ className: "text-sm font-semibold text-[var(--c-primary)]" }}
+                className="text-sm font-medium text-slate-600 transition hover:text-[var(--c-primary)] dark:text-slate-300 dark:hover:text-[var(--c-cta)]"
+                activeProps={{ className: "text-sm font-semibold text-[var(--c-primary)] dark:text-[var(--c-cta)]" }}
               >
                 {n.label}
               </Link>
             ))}
           </nav>
-          <Link
-            to="/contact"
-            className="hidden rounded-full bg-[var(--c-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--c-primary)] shadow-sm transition hover:opacity-90 md:inline-flex"
-          >
-            Get a Quote
-          </Link>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-md p-2 text-[var(--c-primary)] md:hidden"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="rounded-full border border-slate-200 p-2 text-[var(--c-primary)] transition hover:bg-slate-100 dark:border-white/15 dark:text-[var(--c-cta)] dark:hover:bg-white/10"
+              aria-label="Toggle dark mode"
+              title={isDark ? "Switch to light" : "Switch to dark"}
+            >
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <Link
+              to="/contact"
+              className="hidden rounded-full bg-[var(--c-cta)] px-5 py-2.5 text-sm font-semibold text-[var(--c-primary)] shadow-sm transition hover:opacity-90 md:inline-flex"
+            >
+              Get a Quote
+            </Link>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="rounded-md p-2 text-[var(--c-primary)] dark:text-white md:hidden"
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
         {menuOpen && (
-          <div className="border-t border-slate-100 bg-white px-6 py-4 md:hidden">
+          <div className="border-t border-slate-100 bg-white px-6 py-4 dark:border-white/10 dark:bg-[#0B0B1A] md:hidden">
             <div className="flex flex-col gap-4">
               {nav.map((n) => (
                 <Link
                   key={n.to}
                   to={n.to}
                   onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium text-slate-700"
+                  className="text-sm font-medium text-slate-700 dark:text-slate-200"
                 >
                   {n.label}
                 </Link>

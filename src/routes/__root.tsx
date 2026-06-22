@@ -87,12 +87,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "robots", content: "index, follow"},
       { property: "og:url", content: "https://roccess.netlify.app"},
-      { property: "og:image", content: "https://roccess.netlify.app/preview.jpg"},
-
-      // { name: "twitter:card", content: "summary" },
-      // { name: "twitter:site", content: "@Lovable" },
+      { property: "og:image", content: "/og-image.jpg"},
+      { property: "og:image:width", content: "1200"},
+      { property: "og:image:height", content: "630"},
+      { property: "og:image:alt", content: "Roccess — Web Design That Works"},
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Roccess — Web Design That Works" },
+      { name: "twitter:description", content: "Modern websites for ambitious businesses in Zambia and beyond." },
+      { name: "twitter:image", content: "/og-image.jpg" },
+      { name: "theme-color", content: "#7C3AED" },
     ],
     links: [
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       {
         rel: "stylesheet",
         href: appCss,
