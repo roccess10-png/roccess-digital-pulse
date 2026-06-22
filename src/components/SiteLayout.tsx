@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 
-export const WHATSAPP_NUMBER = "260000000000";
+export const WHATSAPP_NUMBER = "260955816380";
 
 const nav = [
   { to: "/about", label: "About" },
@@ -105,8 +105,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </div>
             <div className="text-sm">
               <div className="font-semibold text-white">Contact</div>
-              <p className="mt-3">hello@roccess.co.zm</p>
-              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="mt-1 inline-block text-[var(--c-cta)] hover:underline">
+              <p className="mt-1">+{WHATSAPP_NUMBER} | +260974788182</p>
+              <p className="mt-1">roccess10@gmail.com</p>
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="mt-3 inline-block text-[var(--c-cta)] hover:underline">
                 WhatsApp us
               </a>
             </div>
