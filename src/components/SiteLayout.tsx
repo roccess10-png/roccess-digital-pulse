@@ -17,8 +17,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const [isDark, setIsDark] = useDarkMode();
 
   return (
-    <div className="min-h-screen bg-white font-sans text-[var(--c-text)] antialiased transition-colors dark:bg-[#0B0B1A] dark:text-slate-200">
-      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-[#0B0B1A]/80">
+    <div className="min-h-screen bg-white font-sans text-[var(--c-text)] antialiased transition-colors dark:bg-background dark:text-slate-200">
+      <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl dark:border-white/10 dark:bg-background/80">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--c-primary)]">
@@ -63,7 +63,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
         {menuOpen && (
-          <div className="border-t border-slate-100 bg-white px-6 py-4 dark:border-white/10 dark:bg-[#0B0B1A] md:hidden">
+          <div className="border-t border-slate-100 bg-white px-6 py-4 dark:border-white/10 dark:bg-background md:hidden">
             <div className="flex flex-col gap-4">
               {nav.map((n) => (
                 <Link
