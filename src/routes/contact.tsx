@@ -56,7 +56,7 @@ function ContactPage() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
+          <form onSubmit={handleSubmit} className="card-depth rounded-3xl p-8 lg:p-10">
             {submitted ? (
               <div className="flex h-full min-h-[400px] flex-col items-center justify-center text-center">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-600">
@@ -123,7 +123,7 @@ function ContactPage() {
             </p>
           </div>
           <div className="lg:col-span-2">
-            <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+            <div className="card-depth divide-y divide-slate-200 rounded-2xl">
               {faqs.map((f, i) => {
                 const open = openFaq === i;
                 return (

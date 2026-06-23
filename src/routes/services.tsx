@@ -109,7 +109,7 @@ function ServicesPage() {
           {services.map((s) => (
             <div
               key={s.title}
-              className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-[var(--c-soft)] p-8 transition hover:-translate-y-1 hover:border-[var(--c-accent)] hover:shadow-xl hover:shadow-blue-500/5"
+              className="card-depth-lift group relative overflow-hidden rounded-2xl p-8 hover:border-[var(--c-accent)]"
             >
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--c-primary)] text-[var(--c-cta)] transition group-hover:bg-[var(--c-accent)] group-hover:text-white">
                 <s.icon size={22} />
@@ -144,7 +144,7 @@ function ServicesPage() {
           <p className="mt-2 text-slate-600">Bolt these on to any package.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             {addons.map((a) => (
-              <div key={a.label} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[var(--c-soft)] px-5 py-2.5 text-sm font-medium text-[var(--c-primary)]">
+              <div key={a.label} className="card-depth inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-[var(--c-primary)]">
                 <a.icon size={16} className="text-[var(--c-accent)]" />
                 {a.label}
               </div>
@@ -160,11 +160,11 @@ function ServicesPage() {
           </h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((p, i) => (
-              <div key={p.title} className="relative rounded-2xl border border-slate-200 bg-[var(--c-soft)] p-7">
+              <div key={p.title} className="card-depth-lift relative rounded-2xl p-7">
                 <div className="absolute -top-3 left-7 rounded-full bg-[var(--c-primary)] px-3 py-1 text-xs font-bold text-[var(--c-cta)]">
                   Step {i + 1}
                 </div>
-                <div className="mt-3 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[var(--c-accent)]">
+                <div className="mt-3 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--c-soft)] text-[var(--c-accent)]">
                   <p.icon size={22} />
                 </div>
                 <h3 className="font-bold text-[var(--c-primary)]">{p.title}</h3>
@@ -187,10 +187,10 @@ function ServicesPage() {
             {tiers.map((t) => (
               <div
                 key={t.name}
-                className={`relative rounded-2xl border p-8 ${
+                className={`card-depth-lift relative rounded-2xl p-8 ${
                   t.highlighted
-                    ? "border-[var(--c-accent)] bg-[var(--c-primary)] text-white shadow-xl"
-                    : "border-slate-200 bg-white text-[var(--c-primary)]"
+                    ? "!border-[var(--c-accent)] !bg-[var(--c-primary)] text-white"
+                    : "text-[var(--c-primary)]"
                 }`}
               >
                 {t.highlighted && (

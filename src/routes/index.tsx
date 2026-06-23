@@ -136,7 +136,7 @@ function Home() {
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {highlights.map((s) => (
-              <div key={s.title} className="rounded-2xl border border-slate-200 bg-white p-7">
+              <div key={s.title} className="card-depth-lift rounded-2xl p-7">
                 <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--c-primary)] text-[var(--c-cta)]">
                   <s.icon size={22} />
                 </div>
@@ -161,11 +161,11 @@ function Home() {
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((p, i) => (
-              <div key={p.title} className="relative rounded-2xl border border-slate-200 bg-[var(--c-soft)] p-7">
+              <div key={p.title} className="card-depth-lift relative rounded-2xl p-7">
                 <div className="absolute -top-3 left-7 rounded-full bg-[var(--c-primary)] px-3 py-1 text-xs font-bold text-[var(--c-cta)]">
                   Step {i + 1}
                 </div>
-                <div className="mt-3 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-[var(--c-accent)]">
+                <div className="mt-3 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--c-soft)] text-[var(--c-accent)]">
                   <p.icon size={22} />
                 </div>
                 <h3 className="text-lg font-bold text-[var(--c-primary)]">{p.title}</h3>
