@@ -1,44 +1,49 @@
-## Beef up the site content
+Add visual depth to all cards across the site so they stop looking like flat borders on the background.
 
-Right now each page is pretty bare — mostly a header, a short paragraph, and 3–4 cards. Here's what I'd add to make it feel like a real, substantial site without changing the design language.
+## What we're fixing
+Cards currently rely on thin borders + flat backgrounds with no shadow or elevation. In dark mode this is especially bad — low-contrast borders disappear into the background and cards look like outlined boxes rather than elevated surfaces.
 
-### Home (`/`)
+## How
 
-- **Trust strip** under the hero: "Trusted by businesses across Luapula" + 5–6 client/partner placeholder logos.
-- **Process teaser**: 4-step "How we work" (Discover → Design → Build → Launch) with icons.
-- **Mini testimonial** quote block (1 featured quote, large type).
-- **Stats band**: projects shipped, avg. load time, client satisfaction, response time.
-- **Final CTA band** before the footer.
+### 1. Add depth design tokens to `src/styles.css`
+New semantic tokens for both light and dark modes:
+- `--card-surface`: a card background that's slightly different from the page background
+- `--card-shadow`: a soft colored shadow that lifts the card off the page
+- `--card-inner-light`: a subtle top-edge inner highlight that simulates a light source hitting the surface
+- `--card-border`: a border color that supports the depth instead of fighting it
 
-### About (`/about`)
+### 2. Create a reusable card-depth utility class
+A single `.card-depth` class (via `@utility`) that bundles:
+- background: `var(--card-surface)`
+- box-shadow: `var(--card-shadow)`
+- optional inner highlight
+- smooth transition on hover for a gentle lift
 
-- **Our Story** — 2–3 paragraphs on why Roccess started in Mansa.
-- **Founders section** — cards for Roy Lupemba & Musasa Banda with role + short bio.
-- **Values** — 4 value cards (Craft, Honesty, Speed, Partnership).
-- **Timeline / milestones** — simple vertical timeline (Founded → First client → Today).
+### 3. Apply consistently across all cards
+Update every card-like element to use the new utility:
+- Home page: service highlight cards, process cards
+- Services page: service detail cards, process cards, pricing cards
+- Work page: project cards, testimonial cards, industry tags
+- About page: reason cards, value cards
+- Contact page: form card, FAQ accordion, info-row icon boxes
 
-### Services (`/services`)
+### 4. Dark-mode specific polish
+In dark mode, give cards:
+- A slightly raised surface (brighter than the page background, not darker)
+- A purple-tinted soft shadow
+- An inner top highlight at `rgba(255,255,255,0.04)` to catch light
+- On hover: slightly more lift + brighter highlight
 
-- Expand each of the 4 services into a **detailed block** with: what's included (bullet list), ideal for, starting timeline.
-- **Add-ons row**: SEO setup, copywriting, hosting, domain, logo design.
-- **Process section** (same 4 steps as home, expanded).
-- **Pricing tiers** — 3 simple packages (Starter / Business / Custom) with what's included and "Request quote" CTA.
+### 5. Light-mode treatment
+In light mode, keep the clean aesthetic but add:
+- A very soft slate-tinted shadow
+- Slightly warmer card surface vs pure white background
+- No drastic changes — the current light look is fine, just needs subtle elevation
 
-### Work (`/work`)
-
-- Expand project cards with: short challenge → solution blurb, tech/tools used, results placeholder.
-- **Industries we serve** chip row (Retail, Hospitality, NGOs, Education, Agriculture, Professional services).
-- **Testimonials grid** — 3 placeholder quotes with name/role.
-
-### Contact (`/contact`)
-
-- **FAQ accordion** — 5 common questions (cost, timeline, hosting, revisions, payment).
-- **Office hours** + response-time card next to the contact info.
-- Add **service interest** dropdown to the form.
-
-### Shared
-
-- Add a slim **CTA strip** component reused above the footer on About/Services/Work pages.
-- add navigation on the footer
-
-Let me know which of these to include — I can do all of it, or trim to the essentials (Story + Founders on About, Pricing + Process on Services, Testimonials + Industries on Work, FAQ on Contact).
+## Files to change
+- `src/styles.css` — new tokens + `@utility` class
+- `src/routes/index.tsx` — service cards, process cards
+- `src/routes/services.tsx` — service cards, process cards, pricing cards
+- `src/routes/work.tsx` — project cards, testimonials, industry tags
+- `src/routes/about.tsx` — reason cards, value cards
+- `src/routes/contact.tsx` — form card, FAQ accordion, info-row boxes
