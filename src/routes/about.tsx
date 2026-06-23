@@ -106,7 +106,7 @@ function AboutPage() {
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7">
               {reasons.map((r) => (
-                <div key={r.title} className="rounded-2xl border border-slate-100 bg-white p-6">
+                <div key={r.title} className="card-depth-lift rounded-2xl p-6">
                   <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--c-accent)]/10 text-[var(--c-accent)]">
                     <r.icon size={20} />
                   </div>
@@ -154,7 +154,7 @@ function AboutPage() {
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
-              <div key={v.title} className="rounded-2xl border border-slate-200 bg-white p-7">
+              <div key={v.title} className="card-depth-lift rounded-2xl p-7">
                 <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[var(--c-cta)]/20 text-[var(--c-primary)]">
                   <v.icon size={20} />
                 </div>

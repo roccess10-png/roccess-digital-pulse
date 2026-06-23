@@ -76,7 +76,7 @@ function WorkPage() {
         </div>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {projects.map((p, i) => (
-            <div key={p.title} className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 transition hover:border-[var(--c-cta)]/50">
+            <div key={p.title} className="card-depth-on-dark group relative overflow-hidden rounded-2xl p-8">
               <div
                 className="aspect-[4/3] w-full rounded-xl"
                 style={{
@@ -122,7 +122,7 @@ function WorkPage() {
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Who we work with.</h2>
           <div className="mt-8 flex flex-wrap gap-3">
             {industries.map((i) => (
-              <span key={i} className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-slate-200">
+              <span key={i} className="card-depth-on-dark rounded-full px-5 py-2.5 text-sm font-medium text-slate-200">
                 {i}
               </span>
             ))}
@@ -135,7 +135,7 @@ function WorkPage() {
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Words from the room.</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
-              <div key={t.name} className="rounded-2xl border border-white/10 bg-white/5 p-7">
+              <div key={t.name} className="card-depth-on-dark rounded-2xl p-7">
                 <Quote size={24} className="text-[var(--c-cta)]" />
                 <p className="mt-4 text-slate-200">"{t.quote}"</p>
                 <div className="mt-6 text-sm">
