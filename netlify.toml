@@ -2,6 +2,14 @@
 command = "vite build"
 publish = "dist/client"
 
+[[redirects]]
+from ="/*"
+to = "./netlify/functions/server"
+status = 200
+
+[functions]
+directory = "dist/server"
+
 [dev]
 command = "vite dev"
 port = 3000   
