@@ -1,51 +1,49 @@
-## Goal
+Add visual depth to all cards across the site so they stop looking like flat borders on the background.
 
-In dark mode, every page (Home, Services, About, Contact) should look like the Work page: deep purple/navy background, no white card/section spots. Light mode stays exactly as it is today.
+## What we're fixing
+Cards currently rely on thin borders + flat backgrounds with no shadow or elevation. In dark mode this is especially bad — low-contrast borders disappear into the background and cards look like outlined boxes rather than elevated surfaces.
 
-## Approach
+## How
 
-The pages use a custom palette (`--c-primary`, `--c-accent`, `--c-cta`, `--c-soft`, `--c-text`) plus raw `bg-white` / `border-slate-200` / `divide-slate-200` for cards and form fields. The Work page already looks right because it uses `bg-[var(--c-primary)]` + `bg-white/5` translucent cards.
+### 1. Add depth design tokens to `src/styles.css`
+New semantic tokens for both light and dark modes:
+- `--card-surface`: a card background that's slightly different from the page background
+- `--card-shadow`: a soft colored shadow that lifts the card off the page
+- `--card-inner-light`: a subtle top-edge inner highlight that simulates a light source hitting the surface
+- `--card-border`: a border color that supports the depth instead of fighting it
 
-Fix entirely in CSS — no component rewrites — by:
+### 2. Create a reusable card-depth utility class
+A single `.card-depth` class (via `@utility`) that bundles:
+- background: `var(--card-surface)`
+- box-shadow: `var(--card-shadow)`
+- optional inner highlight
+- smooth transition on hover for a gentle lift
 
-1. **Re-mapping the `--c-*` tokens under `.dark`** in `src/styles.css`:
-   - `--c-primary`: stays the deep navy/purple (this is already the "dark" surface)
-   - `--c-soft`: from `#F8FAFC` → a darker shade (e.g. `#13132A`) so `bg-[var(--c-soft)]` sections stop being white
-   - `--c-text`: from slate-800 → light slate (e.g. `#E2E8F0`) so headings/body using `text-[var(--c-primary)]` remain readable… actually invert: in dark mode, classes like `text-[var(--c-primary)]` need to render light. Simplest: in `.dark`, set `--c-primary: #F1F5F9` for text use AND introduce a separate `--c-surface` for the dark backdrop. But pages use `--c-primary` for both backgrounds and text.
-   - Cleanest split: in `.dark` set
-     - `--c-primary: #F1F5F9` (so text reads light)
-     - `--c-soft: #0F0F23` (so soft section backgrounds are dark)
-     - and override the hero/testimonial sections that use `bg-[var(--c-primary)]` separately — see step 2.
+### 3. Apply consistently across all cards
+Update every card-like element to use the new utility:
+- Home page: service highlight cards, process cards
+- Services page: service detail cards, process cards, pricing cards
+- Work page: project cards, testimonial cards, industry tags
+- About page: reason cards, value cards
+- Contact page: form card, FAQ accordion, info-row icon boxes
 
-2. **Add scoped dark overrides** in `src/styles.css` for the raw-white surfaces and the `bg-[var(--c-primary)]` sections so they don't flip to light:
+### 4. Dark-mode specific polish
+In dark mode, give cards:
+- A slightly raised surface (brighter than the page background, not darker)
+- A purple-tinted soft shadow
+- An inner top highlight at `rgba(255,255,255,0.04)` to catch light
+- On hover: slightly more lift + brighter highlight
 
-```css
-.dark {
-  --c-primary: #F1F5F9;     /* text color in dark */
-  --c-soft: #0F0F23;        /* soft section bg in dark */
-  --c-text: #E2E8F0;
-  --c-surface: #1A1A2E;     /* new: dark hero/cta surface */
-}
-
-/* Recolor raw white surfaces in dark mode */
-.dark .bg-white { background-color: #14142B !important; }
-.dark .border-slate-200 { border-color: rgb(255 255 255 / 0.10) !important; }
-.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(255 255 255 / 0.10) !important; }
-.dark .placeholder\:text-slate-400::placeholder { color: rgb(148 163 184); }
-```
-
-3. **Fix the hero / quote sections** that hardcode `bg-[var(--c-primary)] text-white`. Since `--c-primary` is now light in dark mode, those sections would invert badly. Override them with a small utility: add `.dark section.bg-\[var\(--c-primary\)\] { background-color: #1A1A2E; }` — or, simpler, replace the few usages (4 spots across index.tsx and work.tsx) to use a new `--c-surface` token that stays dark in both themes. Edit only those className strings.
-
-4. **Ensure the `dark` class is actually toggled at the root.** The summary noted `useDarkMode` is commented out in `__root.tsx`. Re-enable it (it's already wired in the header toggle) so the `.dark` class lands on `<html>`/`<body>`.
+### 5. Light-mode treatment
+In light mode, keep the clean aesthetic but add:
+- A very soft slate-tinted shadow
+- Slightly warmer card surface vs pure white background
+- No drastic changes — the current light look is fine, just needs subtle elevation
 
 ## Files to change
-
-- `src/styles.css` — add `.dark` overrides for `--c-*` tokens, raw `bg-white`, `border-slate-200`, `divide-slate-200`, and a new `--c-surface` token.
-- `src/routes/__root.tsx` — re-enable the dark-mode root effect so `.dark` toggles globally.
-- `src/routes/index.tsx`, `src/routes/work.tsx` — swap the 3–4 `bg-[var(--c-primary)]` hero/testimonial section backgrounds to `bg-[var(--c-surface)]` (and matching `text-[var(--c-cta)]` on the inner button keeps working).
-
-## Out of scope
-
-- No layout, copy, or component restructuring.
-- Light mode is untouched.
-- The header dark-toggle button already exists; not redesigning it.
+- `src/styles.css` — new tokens + `@utility` class
+- `src/routes/index.tsx` — service cards, process cards
+- `src/routes/services.tsx` — service cards, process cards, pricing cards
+- `src/routes/work.tsx` — project cards, testimonials, industry tags
+- `src/routes/about.tsx` — reason cards, value cards
+- `src/routes/contact.tsx` — form card, FAQ accordion, info-row boxes

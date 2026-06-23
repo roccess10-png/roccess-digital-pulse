@@ -19,6 +19,19 @@
   --c-cta: #A78BFA;
   --c-soft: #F8FAFC;
   --c-text: #1E293B;
+  /* Card depth tokens — light mode */
+  --card-surface: #FFFFFF;
+  --card-surface-alt: #FDFDFF;
+  --card-border: rgb(15 23 42 / 0.06);
+  --card-shadow:
+    0 1px 2px rgb(15 23 42 / 0.04),
+    0 8px 24px -8px rgb(124 58 237 / 0.12),
+    0 24px 48px -24px rgb(15 23 42 / 0.10);
+  --card-shadow-hover:
+    0 2px 4px rgb(15 23 42 / 0.05),
+    0 16px 32px -8px rgb(124 58 237 / 0.18),
+    0 32px 64px -24px rgb(15 23 42 / 0.14);
+  --card-inner-light: inset 0 1px 0 0 rgb(255 255 255 / 0.8);
 }
 
 /*
@@ -167,6 +180,19 @@
 .dark {
   --c-soft: #14142B;
   --c-text: #E2E8F0;
+  /* Card depth tokens — dark mode (raised surface + tinted shadow) */
+  --card-surface: #1E1E3A;
+  --card-surface-alt: #242247;
+  --card-border: rgb(255 255 255 / 0.06);
+  --card-shadow:
+    0 1px 2px rgb(0 0 0 / 0.4),
+    0 8px 24px -8px rgb(124 58 237 / 0.25),
+    0 24px 48px -24px rgb(0 0 0 / 0.6);
+  --card-shadow-hover:
+    0 2px 4px rgb(0 0 0 / 0.5),
+    0 16px 32px -8px rgb(167 139 250 / 0.30),
+    0 32px 64px -24px rgb(0 0 0 / 0.7);
+  --card-inner-light: inset 0 1px 0 0 rgb(255 255 255 / 0.06);
 }
 
 /* Surfaces: flip raw white/light backgrounds to dark */
@@ -190,3 +216,63 @@
 
 /* Shadows are too subtle on dark — soften */
 .dark .shadow-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.4) !important; }
+
+/*
+ * Reusable card depth utility. Gives cards a real elevated surface
+ * with a soft tinted shadow + subtle top-edge inner highlight, so
+ * they read as raised objects instead of flat outlined boxes.
+ */
+@utility card-depth {
+  background-color: var(--card-surface);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow), var(--card-inner-light);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+
+  &:hover {
+    box-shadow: var(--card-shadow-hover), var(--card-inner-light);
+  }
+}
+
+@utility card-depth-lift {
+  background-color: var(--card-surface);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow), var(--card-inner-light);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover), var(--card-inner-light);
+  }
+}
+
+/* Variant for cards sitting on a dark hero (e.g. work page projects) */
+@utility card-depth-on-dark {
+  background-color: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow:
+    0 8px 24px -8px rgb(0 0 0 / 0.4),
+    0 24px 48px -24px rgb(124 58 237 / 0.3),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(8px);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgb(167 139 250 / 0.4);
+    box-shadow:
+      0 16px 32px -8px rgb(0 0 0 / 0.5),
+      0 32px 64px -24px rgb(167 139 250 / 0.4),
+      inset 0 1px 0 0 rgb(255 255 255 / 0.12);
+  }
+}
