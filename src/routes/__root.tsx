@@ -96,6 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Modern websites for ambitious businesses in Zambia and beyond." },
       { name: "twitter:image", content: "https://roccess.netlify.app/og-image.jpg" },
       { name: "theme-color", content: "#7C3AED" },
+      { name: "google-site-verification", content : "zpafpXeGual2d089JSKgpghvPeb31r9xDQw6hRyB7MQ" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
